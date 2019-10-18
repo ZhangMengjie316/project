@@ -237,7 +237,7 @@
 
 <script>
 export default {
-  
+  props:["lid"]
 }
 </script>
 
