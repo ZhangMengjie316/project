@@ -9,7 +9,7 @@ import MyFooter from './components/MyFooter'
 Vue.config.productionTip = false
 
 // 配置axios的url的基本地址
-// axios.defaults.baseURL = "http://localhost:5050"
+axios.defaults.baseURL = "http://localhost:5050"
 Vue.prototype.axios=axios
 
 Vue.component("my-header",MyHeader);

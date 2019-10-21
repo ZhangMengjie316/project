@@ -263,7 +263,7 @@
 export default {
   data(){
     return{
-      p1:{ price:0,href:'' },
+      p1:{ title:'',price:0,href:'' },
       p2:{ price:0,href:'' },
       p3:{ price:0,href:'' },
       others:{}

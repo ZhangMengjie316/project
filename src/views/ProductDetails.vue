@@ -13,10 +13,10 @@
         <div class="row pr-3">
           <div id="preview" class="col pr-0">
             <div class="card bg-transparent mr-5 position-absolute">
-              <img class="card-img-top" :src="pics[i].md" alt="Card image cap" id="mImg">
-              <div id="mask" class="position-absolute d-none"></div>
+              <img class="card-img-top" :src="pics[i].md" alt="Card image cap" id="mImg" @mouseover="toggle" @mouseout="toggle" >
+              <div id="mask" class="position-absolute" v-show="show"></div>
               <!-- <div id="super-mask" class="position-absolute"></div> -->
-              <div id="div-lg" class="position-absolute d-none" :style="{'background-image':`url(${pics[i].lg})`}"></div>
+              <div id="div-lg" class="position-absolute" v-show="show" :style="{'background-image':`url(${pics[i].lg})`}"></div>
               <div class="card-body p-0 text-center" >
                 <img src="img/product_detail/hover-prev.png" class="btn float-left btn-light border-0 p-1 pt-4 pb-4 " :class="times==0?'disabled':'' " id="btnLeft" @click="move(-1)">
                 <div class="d-inline-block pt-2 mx-0 m-auto">
@@ -247,6 +247,7 @@ export default {
         // {pid:2,sm: ,md: ,lg: }
         // {pid:3,sm: ,md: ,lg: }
       ],
+      show: false, //定义mask，div-large的显示和隐藏
       times:0,  //记录单击按钮左移的次数
       // ul的margin-left始终=times*-62
       // 左边按钮，当times=0时（没有左移的li时）禁用（启用class disabled）
@@ -263,6 +264,9 @@ export default {
   },
   props:["lid"],
   methods: {
+    toggle(){
+      this.show=!this.show;
+    },
     // 当鼠标进入第i个小图片时
     changei(e){
       // 如果进入的img元素
