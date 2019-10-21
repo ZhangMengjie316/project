@@ -277,7 +277,7 @@ export default {
   // 当这个组件对象创建后,自动执行!
   created(){
     this.axios.get(
-      "http://localhost:5050/index"
+      "/index"
     ).then(result=>{
       console.log(result.data)
       this.p1=result.data[0];

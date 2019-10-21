@@ -13,37 +13,37 @@
         <div class="row pr-3">
           <div id="preview" class="col pr-0">
             <div class="card bg-transparent mr-5 position-absolute">
-              <img class="card-img-top" src="img/product/md/57e3b072N661cd00d.jpg" alt="Card image cap" id="mImg">
+              <img class="card-img-top" :src="pics[i].md" alt="Card image cap" id="mImg">
               <div id="mask" class="position-absolute d-none"></div>
-              <div id="super-mask" class="position-absolute"></div>
-              <div id="div-lg" class="position-absolute d-none"></div>
-              <div class="card-body p-0 text-center">
-                <img src="img/product_detail/hover-prev.png" class="btn float-left btn-light border-0 p-1 pt-4 pb-4 disabled" id="btnLeft">
+              <!-- <div id="super-mask" class="position-absolute"></div> -->
+              <div id="div-lg" class="position-absolute d-none" :style="{'background-image':`url(${pics[i].lg})`}"></div>
+              <div class="card-body p-0 text-center" >
+                <img src="img/product_detail/hover-prev.png" class="btn float-left btn-light border-0 p-1 pt-4 pb-4 " :class="times==0?'disabled':'' " id="btnLeft" @click="move(-1)">
                 <div class="d-inline-block pt-2 mx-0 m-auto">
                   <!-- <ul class="list-unstyled mb-0"> -->
-                  <ul class="list-unstyled mb-0" id="ulImgs">
-                    <!--<li class="float-left p-1">
-                      <img src="img/product/sm/57e3b072N661cd00d.jpg" data-md="img/product/md/57e3b072N661cd00d.jpg" data-lg="img/product/lg/57e3b072N661cd00d.jpg">
-                    </li>-->
+                  <ul class="list-unstyled mb-0" id="ulImgs" @mouseover="changei" :style="{width:pics.length*62+'px','margin-left':-62*times+'px'}">
+                    <li class="float-left p-1" v-for = "(p,i) of pics" :key="i">
+                      <img :src="p.sm" :data-i="i">
+                    </li>
                   </ul>
                 </div>
-                <img src="img/product_detail/hover-next.png" class="btn float-right btn-light border-0 p-1 pt-4 pb-4"  id="btnRight">
+                <img src="img/product_detail/hover-next.png" class="btn float-right btn-light border-0 p-1 pt-4 pb-4"  id="btnRight" :class="times>=times-pics.length-4 ? 'disabled' : '' " @click="move(1)">
               </div>
             </div>
           </div>
           <div id="details" class="col pl-0">
-            <h6 id="ptitle" class="font-weight-bold"></h6>
+            <h6 id="ptitle" class="font-weight-bold" v-text="product.title"></h6>
             <h6>
-              <a class="small text-dark font-weight-bold" href="javascript:;"  id="p_sub_title"></a>
+              <a class="small text-dark font-weight-bold" href="javascript:;"  id="p_sub_title" v-text = "product.subtitle"></a>
             </h6>
             <div class="alert alert-secondary small" role="alert">
               <div>
                 <span>学员售价：</span>
-                <h2 class="d-inline text-primary font-weight-bold"  id="pprice"></h2>
+                <h2 class="d-inline text-primary font-weight-bold"  id="pprice">￥{{product.price.toFixed(2)}}</h2>
               </div>
               <div>
                 <span>服务承诺：</span>
-                <span  id="ppromise"></span>
+                <span  id="ppromise" v-text = "product.promise"></span>
               </div>
             </div>
             <!-- 客服 -->
@@ -56,7 +56,7 @@
             <div>
               <div class="float-left small">规格：</div>
               <div class="float-left w-75" id="specs">
-                <!--<a class="btn btn-sm btn-outline-secondary active" href="product_details.html?lid=1">双核i5/8GB内存/128GB闪存</a>-->
+                <router-link v-for="(sp,i) of specs" :key="i" class="btn btn-sm btn-outline-secondary" :class="sp.lid==lid ?'active' :'' " :to="`/details/${sp.lid}`" v-text="sp.spec"></router-link>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -237,7 +237,86 @@
 
 <script>
 export default {
-  props:["lid"]
+  data(){
+    return {
+      product:{price:0},
+      pics:[
+        // 初始化一个无意义的初始值
+        {sm:'',md:'',lg:''}
+        // {pid:1,sm: ,md: ,lg: }
+        // {pid:2,sm: ,md: ,lg: }
+        // {pid:3,sm: ,md: ,lg: }
+      ],
+      times:0,  //记录单击按钮左移的次数
+      // ul的margin-left始终=times*-62
+      // 左边按钮，当times=0时（没有左移的li时）禁用（启用class disabled）
+      // 右边按钮，当times=总图片张数-4时（没有多余的图片，可以左移）禁用 （启用class）
+      // 总张数不足4张时，也禁用右边按钮
+      // 点击右边按钮，ul左移一个li，times+1
+      // 点击左边按钮，ul右移一个li，times-1
+      i:0, //记录当前鼠标进入第几张小图片
+          // 中图片的src等于pics中第i张的图片版本
+          // 大图片div的background-images属性，拿到的时pics数组中第i张图片的大图片版本
+          // 每次鼠标进入第i张小图时，将i改为图片的下标位置，触发页面图片中图片的src和大图片，background-image自动变化
+      specs:[]
+    }
+  },
+  props:["lid"],
+  methods: {
+    // 当鼠标进入第i个小图片时
+    changei(e){
+      // 如果进入的img元素
+      if(e.target.nodeName=='IMG'){
+        // 就修改变量i的值为img元素v-for绑定时，用自定义属性data-i缓存的自己对应的序号
+        this.i = e.target.dataset.i;
+      }
+    },
+    // 当点左右移按钮时
+    move(n){
+      // 只有当图片张数多余4张，有多余的图片时才能点
+      if(this.pics.length>4){
+        // 只要修改times,margin-left自动变化
+        this.times+=n;
+        // 如果-到负数，则恢复到0
+        if(this.times<0){
+          this.times=0
+          // 如果+到超过多余的张数就停留在多余的图片张数上
+        }else if(this.times>this.pics.length-4){
+          this.times=this.pics.length-4
+        }
+      }
+    },
+    load(){
+      (async ()=>{
+          var result = await this.axios.get(
+            "/details",{
+              params:{
+                lid:this.$route.params.lid
+                // this.lid
+              }
+            }
+          );
+          console.log(result.data)
+          this.product = result.data.product;
+          this.pics = result.data.pics;
+          this.specs = result.data.specs;
+      })()
+    }
+  },
+  created() {  //钩子函数,在创建完组建对象后自动调用
+    this.load();
+  },
+  watch: {
+    // lid(){
+    $route(){
+      // 只有切换商品规格，就将图片列表重置会开始位置
+      // 只要更换当前商品的lid，就讲图片列表重置回开始位置，将中图片和大图片的显示重置为显示第0张图片
+      this.times=0;
+      this.i=0;
+      this.load();
+    }
+  },
+  
 }
 </script>
 
@@ -277,7 +356,8 @@ export default {
     overflow:hidden;
   }
   #preview>.card>.card-body>div>ul{
-    transition:all .5s linear;
+    /* 这里不要写all，会导致ul宽度也出现不应该有的过渡。应该只有margin-left变化时，才出现过渡效果 */
+    transition:margin-left .5s linear;
   }
   #preview>.card>.card-body>div>ul>li{
     width:62px; height:62px;

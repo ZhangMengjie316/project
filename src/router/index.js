@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
 import Details from '../views/ProductDetails.vue'
 import List from '../views/ProductList.vue'
+import NotFound from '../views/NotFound'
 
 Vue.use(VueRouter)
 
@@ -12,9 +13,7 @@ const routes = [
   {path: '/index',component: Index},
   {path: '/details/:lid',component: Details,props:true},
   {path: '/productlist',component:List},
-  {path: '/*',component:{
-    template:`<h2 style="color:red; text-align:center">404:Not Found<h2>`
-  }},
+  {path: '/*',component:NotFound},
 ]
 
 const router = new VueRouter({
