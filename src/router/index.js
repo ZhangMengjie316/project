@@ -12,7 +12,7 @@ const routes = [
   {path: '/',component: Index},
   {path: '/index',component: Index},
   {path: '/details/:lid',component: Details,props:true},
-  {path: '/products',component:List},
+  {path: '/products/:kw',component:List,props:true},
   {path: '/*',component:NotFound},
 ]
 

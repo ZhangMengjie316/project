@@ -6,8 +6,8 @@
       </a>
       <div class="form-inline">
         <div class="input-group">
-          <input type="text" class="form-control p-0" placeholder="请输入你要搜索的内容" aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <div class="input-group-append h-75">
+          <input type="text" class="form-control p-0" placeholder="请输入你要搜索的内容" aria-label="Recipient's username" aria-describedby="basic-addon2" v-model="kw" @keydown.13="search">
+          <div class="input-group-append h-75" @click="search">
             <img class="btn p-0" src="img/header/search.png">
           </div>
         </div>
@@ -50,7 +50,25 @@
 
 <script>
 export default {
-  
+  data(){
+    return {
+      kw:''
+    }
+  },
+  methods:{
+    search(){
+      // console.log(`查询 ${this.kw}相关内容...`)
+      this.$router.push("/products/"+this.kw)
+    }
+  },
+  created() {
+    this.kw=this.$route.params.kw
+  },
+  watch: {
+    $route(){
+      this.kw=this.$route.params.kw
+    }
+  },
 }
 </script>
 

@@ -9,169 +9,15 @@
         <div class="col-md-9">
           <h5 class="mb-3 p-2 text-muted">笔记本电脑</h5>
           <div id="plist" class="row bg-white ml-1 mr-1 pt-2 pl-2">
-            <div class="col-md-4 p-1">
+            <div v-for="(p,i) of products " :key="i" class="col-md-4 p-1">
               <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
+                <router-link :to="`/details/${p.lid}`">
+                  <img class="card-img-top" :src="p.md">
+                </router-link>
                 <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
+                  <h5 class="text-primary">￥{{p.price.toFixed(2)}}</h5>
                   <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center p-2 pt-0">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
-                    <input type="text" class="form-control p-1" value="10">
-                    <button class="btn btn-outline-secondary p-0 border-0" type="button">+</button>
-                    <a class="btn btn-primary float-right ml-1 pl-1 pr-1" href="cart.html">加入购物车</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 p-1">
-              <div class="card mb-4 box-shadow pr-2 pl-2">
-                <a href="product_details.html?lid=1">
-                  <img class="card-img-top" src="img/product/md/57b12a31N8f4f75a3.jpg">
-                </a>
-                <div class="card-body p-0">
-                  <h5 class="text-primary">￥6988.00</h5>
-                  <p class="card-text">
-                    <a href="product_details.html?lid=1" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)">Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)</a>
+                    <router-link :to="`/details/${p.lid}`" class="text-muted small" title="Apple MacBook Air 13.3英寸笔记本 银色(Core i5 处理器/8GB内存/128GB SSD闪存 MMGF2CH/A)" v-text="p.title"></router-link>
                   </p>
                   <div class="d-flex justify-content-between align-items-center p-2 pt-0">
                     <button class="btn btn-outline-secondary p-0 border-0" type="button">-</button>
@@ -186,11 +32,11 @@
           <h6 class="mb-3 p-2 text-muted small">
             <nav aria-label="Page navigation example">
               <ul class="pagination mb-0 justify-content-end">
-                <li class="page-item  disabled"><a class="page-link bg-transparent" href="#">上一页</a></li>
-                <li class="page-item"><a class="page-link bg-transparent" href="#">1</a></li>
-                <li class="page-item active"><a class="page-link border" href="#">2</a></li>
-                <li class="page-item"><a class="page-link bg-transparent" href="#">3</a></li>
-                <li class="page-item"><a class="page-link bg-transparent" href="#">下一页</a></li>
+                <li class="page-item " :class="{disabled:pno==0}"><a class="page-link bg-transparent" href="javascript:;" @click="change(-1,$event)">上一页</a></li>
+                 <li v-for="i of pcount" :key="i" class="page-item" :class="{active:i-1==pno}"><a class="page-link" :class="i-1==pno?'border':'bg-transparent'" href="javascript:;" v-text="i" @click="changepage(i-1)"></a></li>
+                <!--<li class="page-item active"><a class="page-link border" href="#">2</a></li>
+                <li class="page-item"><a class="page-link bg-transparent" href="#">3</a></li> -->
+                <li class="page-item" :class="{disabled:pno==pcount-1}"><a class="page-link bg-transparent" href="javascript:;" @click="change(1,$event)">下一页</a></li>
               </ul>
             </nav>
           </h6>
@@ -250,7 +96,48 @@
 
 <script>
 export default {
-  
+  data(){
+    return {
+      pno:0,
+      pcount:0,
+      products:[{price:0}]
+    }
+  },
+  props:['kw'],
+  methods:{
+    change(n,e){
+      if(e.target.className.indexOf("disabled")==-1){
+        this.changepage(parseInt(this.pno)+parseInt(n))
+      }
+      
+    },
+    changepage(i){
+      this.load(i)
+    },
+    load(pno=0){
+      this.axios.get("/products",
+        {
+          params:{
+            kw:this.kw,
+            pno:pno
+          }
+        }
+      ).then(result=>{
+        console.log(result.data)
+        this.pno=result.data.pno
+        this.products=result.data.data
+        this.pcount=result.data.pageCount
+      })
+    }
+  },
+  created() {
+    this.load()
+  },
+  watch:{
+    kw(){
+      this.load()
+    }
+  }
 }
 </script>
 

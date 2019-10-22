@@ -13,10 +13,10 @@
         <div class="row pr-3">
           <div id="preview" class="col pr-0">
             <div class="card bg-transparent mr-5 position-absolute">
-              <img class="card-img-top" :src="pics[i].md" alt="Card image cap" id="mImg" @mouseover="toggle" @mouseout="toggle" >
-              <div id="mask" class="position-absolute" v-show="show"></div>
-              <!-- <div id="super-mask" class="position-absolute"></div> -->
-              <div id="div-lg" class="position-absolute" v-show="show" :style="{'background-image':`url(${pics[i].lg})`}"></div>
+              <img class="card-img-top" :src="pics[i].md" alt="Card image cap" id="mImg"  >
+              <div id="mask" class="position-absolute" v-show="show" :style="maskStyle"></div>
+              <div id="super-mask" class="position-absolute" @mouseover="toggle" @mouseout="toggle" @mousemove="drag"></div>
+              <div id="div-lg" class="position-absolute" v-show="show" :style="{'background-image':`url(${pics[i].lg})`,'background-position':gbPosition}"></div>
               <div class="card-body p-0 text-center" >
                 <img src="img/product_detail/hover-prev.png" class="btn float-left btn-light border-0 p-1 pt-4 pb-4 " :class="times==0?'disabled':'' " id="btnLeft" @click="move(-1)">
                 <div class="d-inline-block pt-2 mx-0 m-auto">
@@ -259,11 +259,36 @@ export default {
           // 中图片的src等于pics中第i张的图片版本
           // 大图片div的background-images属性，拿到的时pics数组中第i张图片的大图片版本
           // 每次鼠标进入第i张小图时，将i改为图片的下标位置，触发页面图片中图片的src和大图片，background-image自动变化
+
+      maskStyle:{
+        left:0,top:0
+      },
+
       specs:[]
     }
   },
   props:["lid"],
   methods: {
+    // 当鼠标在super-mask  div移动
+    drag(e){
+      // 通过事件对象获得鼠标相对于div左上角的偏移量。-mask的一半大小，就算mask左上角相对于div左上角的left和top值
+      var left=e.offsetX-88
+      var top=e.offsetY-88
+      // 如果mask左边越界,就停留在最左边,而不超出
+      if(left<0){left=0}
+      // 否侧如果left超过mImg的款-mask的宽,说明右边月结,就停留在最右边,而不超出.
+      else if(left>176){left=176}
+      // 如果mask上边越界,就停留在最上边,而不超过
+      if(top<0){top=0}
+      // 否侧如果top超过mImg的高-mask的高,说明下边越界,就停留在最右边,而不超出
+      else if(top>176){top=176}
+      // 为最终计算结果left和top添加单位
+      left=left+'px'
+      top=top+'px'
+      // 修改maskStlye对象,自动触发页面mask元素位置的更改
+      this.maskStyle={left,top}
+    },
+    // 当鼠标进入div,切换this.show为true或false
     toggle(){
       this.show=!this.show;
     },
@@ -305,6 +330,11 @@ export default {
           this.pics = result.data.pics;
           this.specs = result.data.specs;
       })()
+    }
+  },
+  computed:{
+    gbPosition(){
+      return `${-parseInt(this.maskStyle.left)*16/7}px  ${-parseInt(this.maskStyle.top)*16/7}px`
     }
   },
   created() {  //钩子函数,在创建完组建对象后自动调用
